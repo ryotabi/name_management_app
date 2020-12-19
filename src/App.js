@@ -1,25 +1,28 @@
-import logo from './logo.svg';
 import './App.css';
+import React from 'react'
+import List from "./components/List.js"
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
+import {Link} from 'react-router-dom'
 
-function App() {
+const App = (props) => {
+  const style = {
+    position:"fixed",
+    right:160,
+    bottom:12,
+}
+const toCreate = () => {
+  props.history.push("/new")
+}
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <List/>
+    <Fab color="primary" aria-label="add" style={style} onClick={toCreate}>
+      <AddIcon/>
+    </Fab>
+    </>
   );
 }
 
 export default App;
+
