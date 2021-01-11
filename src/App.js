@@ -1,9 +1,9 @@
 import './App.css';
-import React from 'react'
+import React,{useEffect} from 'react'
 import List from "./components/List.js"
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
-import {Link} from 'react-router-dom'
+import {auth} from './firebase'
 
 const App = (props) => {
   const style = {
@@ -14,6 +14,13 @@ const App = (props) => {
 const toCreate = () => {
   props.history.push("/new")
 }
+useEffect(()=>{
+  const unSub = auth.onAuthStateChanged((user)=>{
+    !user && props.history.push('login')
+  })
+  return ()=> unSub()
+},[])
+
   return (
     <>
     <List/>
